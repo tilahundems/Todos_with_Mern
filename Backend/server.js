@@ -15,7 +15,7 @@ const port =  5000;
 mongoose.connect(url);
   
 app.use(express.json());
-app.use(cors);
+app.use(cors());
 app.listen(port,()=>
 {
     console.log('Server Is Running on Port :'+  port);
@@ -77,7 +77,7 @@ app.post('/Add', (req,res)=>{
 {
    const alldata= await TodoModel.find().then((Result)=>{
  res.json(Result);  
-    console.log(Result);  
+   
     
    }).catch(err =>{
      console.error("error Ocuured " + err);
