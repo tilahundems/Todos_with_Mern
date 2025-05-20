@@ -4,16 +4,18 @@ const { env } = require('node:process');
 const fs=require('fs');
 const mongoose= require('mongoose');
  const TodoModel = require ('./Models/todo');
-
+  const  cors = require('cors');
 
 const url='mongodb+srv://tilahundems271:aVXMs1Dwi1krvYBI@tododb.txohyl5.mongodb.net/?retryWrites=true&w=majority&appName=todoDB'
 
 // area For Variables
  const app=express();
+  
 const port =  5000;
 mongoose.connect(url);
   
 app.use(express.json());
+app.use(cors);
 app.listen(port,()=>
 {
     console.log('Server Is Running on Port :'+  port);
@@ -75,7 +77,7 @@ app.post('/Add', (req,res)=>{
 {
    const alldata= await TodoModel.find().then((Result)=>{
  res.json(Result);  
-    console.log(Result);
+    console.log(Result);  
     
    }).catch(err =>{
      console.error("error Ocuured " + err);
