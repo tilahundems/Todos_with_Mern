@@ -59,13 +59,29 @@ app.post('/Add', (req,res)=>{
 
 
 
-  app.get('create/:id',  (req,res)=>{
-            const id =req.params();
-        TodoModel.findById(id).then(result =>{
-         res.json(  result);
+  app.get('/view/:id',  (req,res)=>{
+            const  {id} =req.params;
+        TodoModel.findById(id)
+        .then(result =>{
+         res.json(result);
  
        }).catch(err=>{
       res.json("some Error Here"+ err);
        })
 
 });
+
+ app.get('/view', async (req,res)=>
+{
+   const alldata= await TodoModel.find().then((Result)=>{
+ res.json(Result);  
+    console.log(Result);
+    
+   }).catch(err =>{
+     console.error("error Ocuured " + err);
+   })
+ 
+   
+}
+
+)
