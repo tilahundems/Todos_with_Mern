@@ -61,9 +61,9 @@ app.post('/Add', (req,res)=>{
 
 
 
-  app.get('/view/:id',  (req,res)=>{
-            const  {id} =req.params;
-        TodoModel.findById(id)
+  app.get('/view',  (req,res)=>{
+          
+        TodoModel.find()
         .then(result =>{
          res.json(result);
  
@@ -73,14 +73,15 @@ app.post('/Add', (req,res)=>{
 
 });
 
- app.get('/view', async (req,res)=>
+ app.delete('/delete/:id', async (req,res)=>
 {
-   const alldata= await TodoModel.find().then((Result)=>{
- res.json(Result);  
+      const {id}= req.params; 
+    TodoModel.findByIdAndDelete(id).then((Result)=>{
+          res.json(Result);  
    
     
    }).catch(err =>{
-     console.error("error Ocuured " + err);
+     console.error("error Occurred " + err);
    })
  
    
